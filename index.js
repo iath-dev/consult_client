@@ -25,7 +25,7 @@ const getIPV4 = () => {
         console.log(`Interface: ${interfaceName}`);
         console.log(`IP Address: ${netInterface.address}`);
 
-        return netInterface.address;
+        // return netInterface.address;
       }
     }
 
