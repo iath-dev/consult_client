@@ -9,6 +9,10 @@ const SCHEME = 'http'
 
 const PID = process.pid
 
+console.log('====================================');
+console.log(HOST, PORT, SERVICE_NAME, SERVICE_ID, SCHEME, PID);
+console.log('====================================');
+
 // Server Init
 const app = express();
 const consul = new Consul();
