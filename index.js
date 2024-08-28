@@ -1,4 +1,5 @@
-const express = require('express')
+const express = require('express');
+const os = require('os');
 const Consul = require('consul');
 
 const [ _, __, PORT, HOST ] = process.argv;
@@ -11,6 +12,31 @@ const PID = process.pid
 
 console.log('====================================');
 console.log(HOST, PORT, SERVICE_NAME, SERVICE_ID, SCHEME, PID);
+console.log('====================================');
+
+const getIPV4 = () => {
+  const networkInterfaces = os.networkInterfaces();
+
+  for (const interfaceName in networkInterfaces) {
+    const interfaces = networkInterfaces[interfaceName];
+
+    for (const netInterface of interfaces) {
+      if (netInterface.family === 'IPv4' && !netInterface.internal) {
+        console.log(`Interface: ${interfaceName}`);
+        console.log(`IP Address: ${netInterface.address}`);
+
+        return netInterface.address;
+      }
+    }
+
+  }
+
+}
+
+const ipv4 = getIPV4();
+
+console.log('====================================');
+console.log(ipv4);
 console.log('====================================');
 
 // Server Init
