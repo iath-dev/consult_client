@@ -17,12 +17,12 @@ console.log('====================================');
 const app = express();
 const consul = new Consul();
 
-app.get('/health', (_, res) => {
+app.get('/health', (req, res) => {
   console.log('Health Check!');;
   res.end('Ok.');
 })
 
-app.get('/', (_, res) => {
+app.get('/', (req, res) => {
   console.log('GET /', Date.now());
   res.json({
     data: Math.floor(Math.random() * 89999999 + 10000000),
@@ -42,14 +42,14 @@ var check = {
   address: HOST,
   port: PORT, 
   check: {
-	   http: SCHEME+'://'+HOST+':'+PORT+'/health',
-	   ttl: '5s',
-	   interval: '5s',
-     timeout: '5s',
-     deregistercriticalserviceafter: '1m'
-	   }
-  };
+    http: SCHEME+'://'+HOST+':'+PORT+'/health',
+    ttl: '5s',
+    interval: '5s',
+    timeout: '5s',
+    deregistercriticalserviceafter: '1m'
+  }
+};
  
 consul.agent.service.register(check, function(err) {
   if (err) throw err;
-  });
+});
