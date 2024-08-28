@@ -18,19 +18,20 @@ const getIPV4 = () => {
   const networkInterfaces = os.networkInterfaces();
 
   for (const interfaceName in networkInterfaces) {
-    const interfaces = networkInterfaces[interfaceName];
 
-    for (const netInterface of interfaces) {
-      if (netInterface.family === 'IPv4' && !netInterface.internal) {
-        console.log(`Interface: ${interfaceName}`);
-        console.log(`IP Address: ${netInterface.address}`);
-
-        // return netInterface.address;
+    if (interfaceName === 'eth1') {
+      const interfaces = networkInterfaces[interfaceName];
+  
+      for (const netInterface of interfaces) {
+        if (netInterface.family === 'IPv4' && !netInterface.internal) {
+          console.log(`Interface: ${interfaceName}`);
+          console.log(`IP Address: ${netInterface.address}`);
+  
+          return netInterface.address;
+        }
       }
     }
-
   }
-
 }
 
 const ipv4 = getIPV4();
