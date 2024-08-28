@@ -50,6 +50,10 @@ var check = {
   }
 };
  
+console.log('====================================');
+console.log({ check });
+console.log('====================================');
+
 consul.agent.service.register(check, function(err) {
   if (err) throw err;
 });
