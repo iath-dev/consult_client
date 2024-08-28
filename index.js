@@ -55,21 +55,21 @@ app.get('/', (req, res) => {
     data: Math.floor(Math.random() * 89999999 + 10000000),
     data_pid: PID,
     data_service: SERVICE_ID,
-    data_host: HOST
+    data_host: ipv4
   })
 })
 
-app.listen(PORT, () => console.log(`Servicio iniciado en ${SCHEME}://${HOST}:${PORT}!`))
+app.listen(PORT, () => console.log(`Servicio iniciado en ${SCHEME}://${ipv4}:${PORT}!`))
 
 
 /* Registro del servicio */
 var check = {
   id: SERVICE_ID,
   name: SERVICE_NAME,
-  address: HOST,
+  address: ipv4,
   port: PORT, 
   check: {
-    http: SCHEME+'://'+HOST+':'+PORT+'/health',
+    http: SCHEME+'://'+ipv4+':'+PORT+'/health',
     ttl: '5s',
     interval: '5s',
     timeout: '5s',
